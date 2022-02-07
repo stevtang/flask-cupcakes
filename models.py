@@ -3,11 +3,13 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 def connect_db(app):
     """Connect to database"""
 
     db.app = app
     db.init_app(app)
+
 
 class Cupcake(db.Model):
     """Cupcake."""
@@ -38,7 +40,7 @@ class Cupcake(db.Model):
     image = db.Column(
         db.String(200),
         nullable=False,
-        default='https://tinyurl.com/demo/cupcake'
+        default="https://tinyurl.com/demo/cupcake",
     )
 
     def serialize(self):
