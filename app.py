@@ -46,7 +46,8 @@ def create_cupcake():
     flavor = request.json["flavor"]
     size = request.json["size"]
     rating = request.json["rating"]
-    image = request.json["image"]
+    image = request.json.get("image") or None
+    #CODE REVIEW - Changed to '.get' and use 'or none'
 
     cupcake = Cupcake(
         flavor=flavor,
@@ -60,3 +61,36 @@ def create_cupcake():
     serialized = cupcake.serialize()
 
     return (jsonify(cupcake=serialized), 201)
+
+@app.patch("/api/cupcakes/<int:cupcake_id>")
+def update_cupcake(cupcake_id):
+    """Updates specified cupcake"""
+
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
+
+    flavor = request.json.get("flavor") or None
+    size = request.json.get("size") or None
+    rating = request.json.get("rating") or None
+    image = request.json.get("image") or None
+
+    cupcake.flavor = flavor or cupcake.flavor
+    cupcake.size = size or cupcake.size
+    cupcake.rating = rating or cupcake.rating
+    cupcake.image = image or cupcake.image
+
+    db.session.commit()
+
+    serialized = cupcake.serialize()
+
+    return jsonify(cupcake=serialized)
+
+@app.delete("/api/cupcakes/<int:cupcake_id>")
+def delete_cupcake(cupcake_id):
+    """Deletes specified cupcake"""
+
+    cupcake = Cupcake.query.get_or_404(cupcake_id)
+
+    db.session.delete(cupcake)
+    db.session.commit()
+
+    return jsonify({"deleted":cupcake_id})

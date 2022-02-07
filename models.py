@@ -25,6 +25,7 @@ class Cupcake(db.Model):
     flavor = db.Column(
         db.String(20),
         nullable=False,
+        #make unique
     )
 
     size = db.Column(
