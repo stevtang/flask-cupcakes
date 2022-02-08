@@ -17,18 +17,7 @@ async function getAllCupcakes() {
 
 }
 
-async function showAllCupcakes() {
 
-    $cupcakesList.empty();
-
-    let allCupcakes = await getAllCupcakes();
-
-    for (let c of allCupcakes){
-        let $cupcake = generateHTMLMarkup(c)
-        $cupcakesList.append($cupcake)
-    }
-
-}
 
 function generateHTMLMarkup(cupcake){
 
