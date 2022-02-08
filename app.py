@@ -1,5 +1,5 @@
 """Flask app for Cupcakes"""
-from flask import Flask, request, redirect, flash, jsonify
+from flask import Flask, request, flash, jsonify, render_template
 from models import db, connect_db, Cupcake
 from flask_debugtoolbar import DebugToolbarExtension
 
@@ -15,6 +15,13 @@ debug = DebugToolbarExtension(app)
 
 connect_db(app)
 db.create_all()
+
+
+@app.get('/')
+def show_homepage():
+    """Shows homepage"""
+
+    return render_template('index.html')
 
 
 @app.get("/api/cupcakes")
