@@ -4,7 +4,7 @@ const BASE_URL = "http://localhost:5001/"
 
 const $cupcakesList = $("#all-cupcake-list");
 const $addCupcakeButton = $("#add-cupcake-button")
-
+const $cupcakeForm = $("#add-cupcake-form")
 async function getAllCupcakes() {
     const response = await axios({
         url: `${BASE_URL}api/cupcakes`,
@@ -53,23 +53,22 @@ async function addCupcake(evt) {
     const rating = $("#rating-input").val();
     const image = $("#image-input").val();
 
-    let jsonObject = {
-        'flavor':flavor,
-        'size':size,
-        'rating':rating,
-        'image':image
-    };
-    
+    console.log(flavor, size, rating);
     console.log(jsonObject);
 
     const response = await axios.post(
         `${BASE_URL}api/cupcakes`,
-        jsonObject
+        {
+            flavor,
+            size,
+            rating,
+            image
+        }
     );
 
     showAllCupcakes();
 }
 
-$addCupcakeButton.on("submit", addCupcake);
+$cupcakeForm.on("submit", addCupcake);
 
 showAllCupcakes();
