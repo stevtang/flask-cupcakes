@@ -17,7 +17,20 @@ async function getAllCupcakes() {
 
 }
 
+function generateHTMLMarkup(cupcake){
 
+    return $(`
+    
+        <li id="${cupcake.id}">
+            <img src="${cupcake.image}"></img>
+            <p>Flavor: ${cupcake.flavor}<br>
+            Size: ${cupcake.size}<br>
+            Rating: ${cupcake.rating}</p>
+        </li>
+    
+    `)
+
+}
 
 function generateHTMLMarkup(cupcake){
 
