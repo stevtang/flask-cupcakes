@@ -35,11 +35,12 @@ function generateHTMLMarkup(cupcake){
     return $(`
     
         <li id="${cupcake.id}">
-            <p>${cupcake.flavor}</p>
-            <p>${cupcake.size}</p>
-            <p>${cupcake.rating}</p>
             <img src="${cupcake.image}"></img>
+            <p>Flavor: ${cupcake.flavor}<br>
+            Size: ${cupcake.size}<br>
+            Rating: ${cupcake.rating}</p>
         </li>
+    
     `)
 
 }
